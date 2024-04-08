@@ -94,8 +94,8 @@ function closeWin() {
 
 }
 
-async function sleep( timeMS ) {
-    return new Promise( res => setTimeout( res, time ) );
+async function sleep(timeMS) {
+    return new Promise(res => setTimeout(res, time));
 }
 
 /**  模拟鼠标移动  改方法来自https://blog.csdn.net/Wuzihui___/article/details/79952068
@@ -108,9 +108,9 @@ function dragandDrop(btn_hk, clientX, clientY, distance) {
     var elem = btn_hk,
         k = 0,
         interval;
-    iME(elem,"mousedown",0, 0, clientX, clientY);
+    iME(elem, "mousedown", 0, 0, clientX, clientY);
     let waitTime = Math.floor(Math.random() * (0.005 * 1000 - 0.09 * 1000) + 0.09 * 1000)
-    interval = setInterval(function() {
+    interval = setInterval(function () {
         k++;
         iter(k);
         if (k === distance) {
@@ -385,11 +385,12 @@ function getNews() {
             url: NewsUrl1,
             dataType: "json",
             success: function (data) {
+                var tomorrow = new Date(currDate.getTime() - (24 * 60 * 60 * 1000)).toISOString().split('T')[0];
                 let j = 0;
-                if (n == 6) {//如果今天还没学过，则优先找今天的新闻
+                if (n == 6) {//如果今天还没学过，则优先找今天的新闻                    
                     for (let i = 0; i < n; i++) {
                         //如果有当天日期的,则加入
-                        if (data[j].auditTime.indexOf(currDate) != -1) {
+                        if (data[j].auditTime.indexOf(currDate) != -1 || data[j].auditTime.indexOf(tomorrow) != -1) {
                             news.push(data[j]);
                             j++;
                         } else {//否则跳出循环
@@ -915,7 +916,7 @@ async function doingExam() {
                     //没答案，随便选一个
                     try {
                         allbuttons[0].click();
-                    } catch(e) {
+                    } catch (e) {
                         console.log(e);
                     }
                 }
@@ -1214,7 +1215,7 @@ async function start() {
                 } else {
                     tasks[3] = true;
                 }*/
-                    tasks[4] = true;
+                tasks[4] = true;
                 //检查专项练习
                 /*if (settings.ExamPaper && taskProgress[4].currentScore == 0) {
                     tasks[4] = false;//只要还有要做的，就当做没完成
