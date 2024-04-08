@@ -385,6 +385,7 @@ function getNews() {
             url: NewsUrl1,
             dataType: "json",
             success: function (data) {
+                data = data.slice(0, 20);
                 var tomorrow = new Date(currDate.getTime() - (24 * 60 * 60 * 1000)).toISOString().split('T')[0];
                 let j = 0;
                 if (n == 6) {//如果今天还没学过，则优先找今天的新闻                    
@@ -425,6 +426,7 @@ function getVideos() {
             url: VideosUrl1,
             dataType: "json",
             success: function (data) {
+                data = data.slice(0, 20);
                 let j = 0;
                 if (n == 6) {
                     for (let i = 0; i < n; i++) {
